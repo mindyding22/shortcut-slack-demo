@@ -294,18 +294,18 @@ code { background: #f0f0f5; padding: 2px 6px; border-radius: 4px; font-size: 0.8
   display: flex;
   height: 100vh;
   overflow: hidden;
-  background: #1a1d21;
+  background: #3F0E40;
 }
 
 /* ─── Sidebar ─── */
 .slack-sidebar {
   width: 260px;
-  background: #19171D;
-  color: #cfc3cf;
+  background: #3F0E40;
+  color: #e8d5e0;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  border-right: 1px solid rgba(255,255,255,0.08);
+  border-right: 1px solid rgba(255,255,255,0.1);
 }
 
 .slack-workspace-header {
@@ -313,7 +313,8 @@ code { background: #f0f0f5; padding: 2px 6px; border-radius: 4px; font-size: 0.8
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px 12px 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: #350d36;
 }
 
 .slack-workspace-name {
@@ -324,7 +325,7 @@ code { background: #f0f0f5; padding: 2px 6px; border-radius: 4px; font-size: 0.8
 }
 
 .slack-workspace-edit {
-  color: #9a8d9a;
+  color: #cba6cc;
   font-size: 0.9rem;
 }
 
@@ -337,7 +338,7 @@ code { background: #f0f0f5; padding: 2px 6px; border-radius: 4px; font-size: 0.8
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #9a8d9a;
+  color: #cba6cc;
   padding: 0 16px 6px;
 }
 
@@ -349,7 +350,7 @@ code { background: #f0f0f5; padding: 2px 6px; border-radius: 4px; font-size: 0.8
   padding: 4px 16px 4px 20px;
   background: none;
   border: none;
-  color: #cfc3cf;
+  color: #e8d5e0;
   font-size: 0.9rem;
   cursor: pointer;
   text-align: left;
@@ -358,12 +359,12 @@ code { background: #f0f0f5; padding: 2px 6px; border-radius: 4px; font-size: 0.8
 }
 
 .slack-channel-btn:hover:not(:disabled) {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.1);
   color: #fff;
 }
 
 .slack-channel-btn.active {
-  background: #1264A3;
+  background: #1164A3;
   color: #fff;
   border-radius: 6px;
   margin: 0 8px;
@@ -400,7 +401,7 @@ code { background: #f0f0f5; padding: 2px 6px; border-radius: 4px; font-size: 0.8
 
 .slack-sidebar-footer {
   padding: 12px 16px;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,255,255,0.1);
   margin-top: auto;
 }
 
@@ -936,7 +937,7 @@ code { background: #f0f0f5; padding: 2px 6px; border-radius: 4px; font-size: 0.8
 
 @media (max-width: 700px) {
   .slack-app { flex-direction: column; height: auto; min-height: 100vh; }
-  .slack-sidebar { width: 100%; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .slack-sidebar { width: 100%; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
   .slack-sidebar-section { padding: 8px 0; display: flex; align-items: center; gap: 4px; }
   .slack-sidebar-section:nth-child(n+3) { display: none; }
   .slack-sidebar-label { display: none; }
