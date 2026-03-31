@@ -286,7 +286,669 @@ code { background: #f0f0f5; padding: 2px 6px; border-radius: 4px; font-size: 0.8
 .preview-section { margin-top: 28px; border-top: 1px solid #eee; padding-top: 20px; }
 .preview-section h2 { font-size: 0.9rem; color: #999; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
 
+/* ══════════════════════════════════════════════════════════
+   SLACK-LIKE UI
+   ══════════════════════════════════════════════════════════ */
+
+.slack-app {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: #1a1d21;
+}
+
+/* ─── Sidebar ─── */
+.slack-sidebar {
+  width: 260px;
+  background: #19171D;
+  color: #cfc3cf;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.slack-workspace-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.slack-workspace-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.2px;
+}
+
+.slack-workspace-edit {
+  color: #9a8d9a;
+  font-size: 0.9rem;
+}
+
+.slack-sidebar-section {
+  padding: 12px 0 4px;
+}
+
+.slack-sidebar-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #9a8d9a;
+  padding: 0 16px 6px;
+}
+
+.slack-channel-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 4px 16px 4px 20px;
+  background: none;
+  border: none;
+  color: #cfc3cf;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 0;
+  height: 28px;
+}
+
+.slack-channel-btn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+}
+
+.slack-channel-btn.active {
+  background: #1264A3;
+  color: #fff;
+  border-radius: 6px;
+  margin: 0 8px;
+  padding: 4px 12px;
+  width: calc(100% - 16px);
+}
+
+.slack-channel-btn:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.slack-channel-prefix {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 300;
+}
+
+.slack-dm-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #555;
+  flex-shrink: 0;
+}
+
+.slack-dm-status.online {
+  background: #2BAC76;
+}
+
+.slack-app-icon {
+  font-size: 0.8rem;
+}
+
+.slack-sidebar-footer {
+  padding: 12px 16px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: auto;
+}
+
+.slack-sidebar-link {
+  color: #6c63ff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.slack-sidebar-link:hover {
+  color: #a5a0ff;
+  text-decoration: underline;
+}
+
+/* ─── Main content area ─── */
+.slack-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  overflow: hidden;
+}
+
+.slack-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ─── Compose panel (left side of main) ─── */
+.slack-compose-panel {
+  width: 380px;
+  background: #f8f8f8;
+  border-right: 1px solid #e0e0e0;
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.slack-compose-header h2 {
+  font-size: 1.15rem;
+  color: #1d1c1d;
+  margin-bottom: 4px;
+}
+
+.slack-compose-desc {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 16px;
+}
+
+.slack-compose-samples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.slack-compose-samples-label {
+  font-size: 0.75rem;
+  color: #999;
+  font-weight: 500;
+}
+
+.slack-sample-chip {
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #555;
+  font-weight: 500;
+  width: auto;
+  transition: all 0.15s;
+}
+
+.slack-sample-chip:hover {
+  background: #6c63ff;
+  color: #fff;
+  border-color: #6c63ff;
+}
+
+.slack-compose-form label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.slack-compose-form input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  background: #fff;
+}
+
+.slack-compose-form input:focus {
+  outline: none;
+  border-color: #1264A3;
+  box-shadow: 0 0 0 1px #1264A3;
+}
+
+.slack-outputs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.slack-outputs-header label { margin-bottom: 0; }
+
+.slack-add-btn {
+  font-size: 0.75rem;
+  padding: 2px 10px;
+  background: none;
+  border: 1px solid #1264A3;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #1264A3;
+  font-weight: 600;
+  width: auto;
+}
+
+.slack-add-btn:hover { background: #1264A3; color: #fff; }
+
+.slack-output-row {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.slack-output-row input { flex: 1; }
+
+.slack-remove-btn {
+  width: 32px;
+  height: 34px;
+  padding: 0;
+  background: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #c0c0c0;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.slack-remove-btn:hover { color: #e53935; border-color: #e53935; }
+
+.slack-send-btn {
+  width: 100%;
+  padding: 10px;
+  background: #007a5a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background 0.15s;
+}
+
+.slack-send-btn:hover:not(:disabled) { background: #148567; }
+.slack-send-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.slack-status {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.slack-status.success { background: #e8f5e9; color: #2e7d32; }
+.slack-status.error { background: #ffebee; color: #c62828; }
+
+.slack-info-box {
+  background: #f0f5ff;
+  border: 1px solid #d0e0ff;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 16px;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.slack-info-box strong { display: block; margin-bottom: 6px; color: #1264A3; }
+.slack-info-box ol { padding-left: 18px; color: #555; }
+.slack-info-box li { margin-bottom: 3px; }
+.slack-info-box code { background: #e8e8ee; padding: 1px 5px; border-radius: 3px; font-size: 0.75rem; }
+
+/* ─── Slack preview pane (right side) ─── */
+.slack-preview-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  overflow: hidden;
+}
+
+.slack-channel-header {
+  padding: 12px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #1d1c1d;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.slack-channel-hash {
+  color: #999;
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin-right: 2px;
+}
+
+.slack-messages-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* ─── Date divider ─── */
+.slack-date-divider {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.slack-date-divider::before,
+.slack-date-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.slack-date-divider span {
+  padding: 0 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1d1c1d;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  padding: 4px 14px;
+  background: #fff;
+}
+
+/* ─── Messages ─── */
+.slack-msg {
+  display: flex;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.slack-msg:hover {
+  background: #f8f8f8;
+  margin: 0 -20px;
+  padding: 8px 20px;
+  border-radius: 0;
+}
+
+.slack-msg-avatar-col {
+  flex-shrink: 0;
+  width: 36px;
+}
+
+.slack-bot-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #6c63ff, #4834d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slack-bot-avatar-icon {
+  font-size: 1rem;
+}
+
+.slack-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #2BAC76, #1a9960);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.slack-msg-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.slack-msg-header {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.slack-msg-author {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #1d1c1d;
+}
+
+.slack-msg-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #999;
+  background: #f0f0f0;
+  padding: 1px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.3px;
+}
+
+.slack-msg-time {
+  font-size: 0.7rem;
+  color: #aaa;
+  font-weight: 400;
+}
+
+.slack-msg-text {
+  font-size: 0.9rem;
+  color: #1d1c1d;
+  line-height: 1.5;
+}
+
+.slack-inline-link {
+  color: #1264A3;
+  text-decoration: none;
+}
+
+.slack-inline-link:hover { text-decoration: underline; }
+
+/* ─── Slack attachment card ─── */
+.slack-attachment {
+  display: flex;
+  margin-top: 4px;
+  max-width: 520px;
+}
+
+.slack-attachment-bar {
+  width: 4px;
+  background: #6c63ff;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.slack-attachment-body {
+  padding: 8px 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.slack-attachment-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1d1c1d;
+  margin-bottom: 6px;
+}
+
+.slack-attachment-link {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1264A3;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.slack-attachment-link:hover { text-decoration: underline; }
+
+.slack-attachment-desc {
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.slack-attachment-divider {
+  height: 1px;
+  background: #e8e8e8;
+  margin: 8px 0;
+}
+
+.slack-attachment-section-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1d1c1d;
+  margin-bottom: 4px;
+}
+
+.slack-attachment-field {
+  font-size: 0.85rem;
+  color: #555;
+  padding: 2px 0;
+  border-left: 3px solid #e0e0e0;
+  padding-left: 8px;
+  margin-bottom: 2px;
+}
+
+.slack-field-label {
+  font-weight: 700;
+  color: #1d1c1d;
+}
+
+.slack-attachment-footer {
+  font-size: 0.72rem;
+  color: #999;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.slack-footer-icon {
+  font-size: 0.7rem;
+  color: #6c63ff;
+}
+
+.slack-btn-primary {
+  padding: 5px 12px;
+  background: #007a5a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: auto;
+}
+
+.slack-btn-primary:hover { background: #148567; }
+
+/* ─── Unfurl specific ─── */
+.slack-unfurl-thread {
+  margin-left: 44px;
+  margin-top: -4px;
+  margin-bottom: 8px;
+}
+
+.slack-unfurl-app-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.slack-unfurl-app-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #6c63ff, #4834d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+}
+
+.slack-unfurl-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 8px 0;
+}
+
+.slack-unfurl-metric {
+  display: flex;
+  flex-direction: column;
+}
+
+.slack-unfurl-metric-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.slack-unfurl-metric-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1d1c1d;
+}
+
+/* ─── Empty state ─── */
+.slack-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #999;
+  text-align: center;
+  padding: 40px;
+}
+
+.slack-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.slack-empty-state p {
+  font-size: 0.9rem;
+  max-width: 280px;
+  line-height: 1.5;
+}
+
 /* ═══ Responsive ═══ */
+@media (max-width: 900px) {
+  .slack-sidebar { width: 200px; }
+  .slack-compose-panel { width: 300px; }
+}
+
+@media (max-width: 700px) {
+  .slack-app { flex-direction: column; height: auto; min-height: 100vh; }
+  .slack-sidebar { width: 100%; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .slack-sidebar-section { padding: 8px 0; display: flex; align-items: center; gap: 4px; }
+  .slack-sidebar-section:nth-child(n+3) { display: none; }
+  .slack-sidebar-label { display: none; }
+  .slack-workspace-header { padding: 8px 12px; }
+  .slack-sidebar-footer { display: none; }
+  .slack-channel-btn { white-space: nowrap; height: auto; padding: 6px 12px; }
+  .slack-channel-btn.active { margin: 0 4px; width: auto; }
+  .slack-layout { flex-direction: column; }
+  .slack-compose-panel { width: 100%; border-right: none; border-bottom: 1px solid #e0e0e0; }
+  .slack-preview-pane { min-height: 400px; }
+}
+
 @media (max-width: 600px) {
   .landing-container, .dashboard-container { padding: 16px; margin: 16px auto; }
   .container { margin: 16px; padding: 20px; }
