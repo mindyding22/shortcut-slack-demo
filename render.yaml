@@ -2,7 +2,7 @@ services:
   - type: web
     name: shortcut-slack-demo
     runtime: node
-    buildCommand: npm run build && cd server && npm install
+    buildCommand: npm run build
     startCommand: npm start
     envVars:
       - key: SLACK_WEBHOOK_URL
