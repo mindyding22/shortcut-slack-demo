@@ -1,5 +1,9 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -304,6 +308,13 @@ app.post("/api/simulate-unfurl", (req, res) => {
   const model = models.get(match[1]);
   if (!model) return res.status(404).json({ error: "Model not found" });
   res.json({ name: model.name, creator: model.creator, summary: model.summary, outputs: model.outputs, url });
+});
+
+// ── Serve React frontend in production ──
+const clientDist = path.join(__dirname, "../client/dist");
+app.use(express.static(clientDist));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(clientDist, "index.html"));
 });
 
 app.listen(PORT, () => {

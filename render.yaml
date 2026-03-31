@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: shortcut-slack-demo
+    runtime: node
+    buildCommand: npm run build && cd server && npm install
+    startCommand: npm start
+    envVars:
+      - key: SLACK_WEBHOOK_URL
+        sync: false
+      - key: SLACK_BOT_TOKEN
+        sync: false
+      - key: NODE_ENV
+        value: production
