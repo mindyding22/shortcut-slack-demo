@@ -311,11 +311,20 @@ app.post("/api/simulate-unfurl", (req, res) => {
 });
 
 // ── Serve React frontend in production ──
+import fs from "fs";
 const clientDist = path.join(__dirname, "../client/dist");
-app.use(express.static(clientDist));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(clientDist, "index.html"));
-});
+const indexHtml = path.join(clientDist, "index.html");
+
+if (fs.existsSync(clientDist)) {
+  console.log("Serving frontend from", clientDist);
+  app.use(express.static(clientDist));
+  app.get("*", (req, res) => {
+    res.sendFile(indexHtml);
+  });
+} else {
+  console.warn("WARNING: client/dist not found at", clientDist);
+  console.warn("Run 'npm run build' first to build the frontend");
+}
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
