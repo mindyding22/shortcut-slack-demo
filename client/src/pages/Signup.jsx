@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate, useSearchParams, Link } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../App";
+import ShortcutNav from "../components/ShortcutNav";
 
 export default function Signup() {
   const [isLogin, setIsLogin] = useState(false);
@@ -43,25 +44,22 @@ export default function Signup() {
   }
 
   return (
-    <div className="landing-page">
-      <header className="landing-topbar">
-        <Link to="/" className="logo">Shortcut AI</Link>
-      </header>
+    <div className="sc-page">
+      <ShortcutNav />
 
-      <div className="auth-container">
-        <h1>{isLogin ? "Welcome back" : "Create your free account"}</h1>
-        <p className="subtitle">
+      <div className="sc-auth-container">
+        <h1 className="sc-auth-title">{isLogin ? "Welcome back" : "Create your free account"}</h1>
+        <p className="sc-auth-desc">
           {isLogin
             ? "Sign in to access your financial models"
             : "View full models, build your own, and share with your team"}
         </p>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="sc-auth-form">
           {!isLogin && (
             <>
-              <label htmlFor="name">Full Name</label>
+              <label>Full Name</label>
               <input
-                id="name"
                 type="text"
                 placeholder="Your name"
                 value={name}
@@ -70,9 +68,8 @@ export default function Signup() {
             </>
           )}
 
-          <label htmlFor="email">Email</label>
+          <label>Email</label>
           <input
-            id="email"
             type="email"
             required
             placeholder="you@company.com"
@@ -80,9 +77,8 @@ export default function Signup() {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <label htmlFor="password">Password</label>
+          <label>Password</label>
           <input
-            id="password"
             type="password"
             required
             placeholder="At least 6 characters"
@@ -90,30 +86,22 @@ export default function Signup() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit" className="cta-button" disabled={loading}>
-            {loading
-              ? "Please wait..."
-              : isLogin
-                ? "Sign in"
-                : "Sign up free"}
+          <button type="submit" className="sc-cta-button" disabled={loading}>
+            {loading ? "Please wait..." : isLogin ? "Sign in" : "Sign up free"}
           </button>
         </form>
 
-        {error && <p className="status error">{error}</p>}
+        {error && <p className="sc-error">{error}</p>}
 
-        <p className="auth-toggle">
+        <p className="sc-auth-toggle">
           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
           <button
             type="button"
-            className="toggle-link"
+            className="sc-toggle-link"
             onClick={() => { setIsLogin(!isLogin); setError(null); }}
           >
             {isLogin ? "Sign up" : "Sign in"}
           </button>
-        </p>
-
-        <p className="cta-sub">
-          Built with <strong>Shortcut AI</strong> — AI-powered financial modeling
         </p>
       </div>
     </div>

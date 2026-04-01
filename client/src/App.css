@@ -930,7 +930,548 @@ code { background: #f0f0f5; padding: 2px 6px; border-radius: 4px; font-size: 0.8
   line-height: 1.5;
 }
 
-/* ═══ Responsive ═══ */
+/* ══════════════════════════════════════════════════════════
+   SHORTCUT.AI STYLED PAGES (landing, signup, dashboard)
+   ══════════════════════════════════════════════════════════ */
+
+.sc-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+/* ─── Nav bar (matches shortcut.ai) ─── */
+.sc-nav {
+  border-bottom: 1px solid #e5e7eb;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.sc-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 64px;
+}
+
+.sc-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.sc-logo {
+  display: flex;
+  align-items: center;
+}
+
+.sc-nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.sc-nav-link {
+  font-size: 0.9rem;
+  color: #374151;
+  cursor: pointer;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.sc-nav-link:hover {
+  color: #111;
+}
+
+.sc-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sc-nav-user {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.sc-btn-login {
+  font-size: 0.9rem;
+  color: #374151;
+  background: none;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  width: auto;
+}
+
+.sc-btn-login:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.sc-btn-primary {
+  font-size: 0.9rem;
+  color: #fff;
+  background: #1a1a1a;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  width: auto;
+}
+
+.sc-btn-primary:hover {
+  background: #333;
+}
+
+/* ─── Content area ─── */
+.sc-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  flex: 1;
+}
+
+/* ─── Model header ─── */
+.sc-model-header {
+  margin-bottom: 32px;
+}
+
+.sc-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.sc-badge.small {
+  font-size: 0.65rem;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+}
+
+.sc-model-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.sc-model-meta {
+  margin-bottom: 12px;
+}
+
+.sc-creator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.sc-creator.small {
+  font-size: 0.8rem;
+  gap: 6px;
+}
+
+.sc-creator-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #16a34a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.sc-creator-avatar.small {
+  width: 22px;
+  height: 22px;
+  font-size: 0.65rem;
+}
+
+.sc-model-summary {
+  font-size: 1rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* ─── Metrics ─── */
+.sc-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.sc-metric-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.sc-metric-label {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.sc-metric-value {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #111;
+}
+
+/* ─── Data table ─── */
+.sc-table-section {
+  margin-bottom: 32px;
+}
+
+.sc-table-wrap {
+  position: relative;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.sc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.sc-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.8rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sc-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+}
+
+.sc-row-label {
+  font-weight: 500;
+  color: #111;
+}
+
+.sc-table tbody tr:last-child td { border-bottom: none; }
+
+.sc-table-blurred .sc-table tbody tr:last-child td {
+  filter: blur(4px);
+  opacity: 0.4;
+}
+
+.sc-table-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(transparent, rgba(255,255,255,0.85) 30%, #fff);
+}
+
+.sc-lock-icon { color: #9ca3af; }
+.sc-lock-text { font-size: 0.85rem; color: #6b7280; font-weight: 500; }
+
+/* ─── CTA ─── */
+.sc-cta-section {
+  text-align: center;
+  padding: 24px 0;
+}
+
+.sc-cta-button {
+  display: inline-block;
+  padding: 14px 40px;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  width: auto;
+}
+
+.sc-cta-button:hover:not(:disabled) { background: #333; }
+.sc-cta-button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.sc-cta-sub {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* ─── Share bar ─── */
+.sc-share-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #f9fafb;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  margin-top: 8px;
+}
+
+.sc-share-label { font-size: 0.9rem; font-weight: 500; color: #374151; }
+
+.sc-share-btn {
+  padding: 8px 20px;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: auto;
+}
+
+.sc-share-btn:hover { background: #333; }
+
+/* ─── Auth page ─── */
+.sc-auth-container {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 40px;
+  text-align: center;
+  flex: 1;
+}
+
+.sc-auth-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8rem;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.sc-auth-desc {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 28px;
+}
+
+.sc-auth-form {
+  text-align: left;
+}
+
+.sc-auth-form label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.sc-auth-form input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+  background: #fff;
+}
+
+.sc-auth-form input:focus {
+  outline: none;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.15);
+}
+
+.sc-auth-form .sc-cta-button {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.sc-error {
+  margin-top: 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.sc-auth-toggle {
+  margin-top: 24px;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.sc-toggle-link {
+  background: none;
+  border: none;
+  color: #16a34a;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: inherit;
+  width: auto;
+  padding: 0;
+}
+
+.sc-toggle-link:hover { text-decoration: underline; }
+
+/* ─── Dashboard ─── */
+.sc-dashboard {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  flex: 1;
+}
+
+.sc-dashboard-header {
+  margin-bottom: 32px;
+}
+
+.sc-section-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8rem;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.sc-section-desc {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.sc-models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.sc-model-card-link { text-decoration: none; color: inherit; }
+
+.sc-model-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  transition: box-shadow 0.15s, transform 0.15s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sc-model-card:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
+.sc-card-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.sc-card-summary {
+  font-size: 0.8rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.sc-card-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.sc-card-metric {
+  font-size: 0.8rem;
+  color: #374151;
+}
+
+.sc-card-footer {
+  border-top: 1px solid #f3f4f6;
+  padding-top: 12px;
+}
+
+/* ─── Footer ─── */
+.sc-footer {
+  margin-top: auto;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.sc-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.sc-footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.sc-footer-links span { cursor: pointer; }
+.sc-footer-links span:hover { color: #374151; }
+
+/* ─── Responsive for Shortcut pages ─── */
+@media (max-width: 768px) {
+  .sc-nav-links { display: none; }
+  .sc-model-title { font-size: 1.6rem; }
+  .sc-metrics { grid-template-columns: 1fr 1fr; }
+  .sc-content { padding: 24px 16px; }
+  .sc-models-grid { grid-template-columns: 1fr; }
+  .sc-auth-container { margin: 24px auto; padding: 24px; }
+  .sc-footer-inner { flex-direction: column; gap: 8px; }
+}
+
+/* ═══ Responsive (Slack UI) ═══ */
 @media (max-width: 900px) {
   .slack-sidebar { width: 200px; }
   .slack-compose-panel { width: 300px; }

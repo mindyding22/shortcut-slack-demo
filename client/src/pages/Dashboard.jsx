@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../App";
+import ShortcutNav from "../components/ShortcutNav";
 
 export default function Dashboard() {
-  const { auth, logout } = useAuth();
-  const navigate = useNavigate();
   const [models, setModels] = useState([]);
 
   useEffect(() => {
@@ -13,50 +12,33 @@ export default function Dashboard() {
       .then(setModels);
   }, []);
 
-  function handleLogout() {
-    logout();
-    navigate("/");
-  }
-
   return (
-    <div className="landing-page">
-      <header className="landing-topbar">
-        <Link to="/" className="logo">Shortcut AI</Link>
-        <div className="topbar-right">
-          <span className="topbar-user">
-            {auth.user.name}
-          </span>
-          <button className="topbar-link" onClick={handleLogout}>
-            Sign out
-          </button>
-        </div>
-      </header>
+    <div className="sc-page">
+      <ShortcutNav />
 
-      <div className="dashboard-container">
-        <div className="dashboard-header">
-          <h1>Your Models</h1>
-          <p className="subtitle">View, analyze, and share financial models with your team.</p>
+      <div className="sc-dashboard">
+        <div className="sc-dashboard-header">
+          <h1 className="sc-section-title">Your Models</h1>
+          <p className="sc-section-desc">View, analyze, and share financial models with your team.</p>
         </div>
 
-        <div className="models-grid">
+        <div className="sc-models-grid">
           {models.map((model) => (
-            <Link to={`/model/${model.id}`} key={model.id} className="model-card-link">
-              <div className="model-grid-card">
-                <div className="model-card-header">
-                  <span className="model-type-badge small">Financial Model</span>
-                </div>
-                <h3>{model.name}</h3>
-                <p className="model-card-summary">{model.summary}</p>
-                <div className="model-card-metrics">
+            <Link to={`/model/${model.id}`} key={model.id} className="sc-model-card-link">
+              <div className="sc-model-card">
+                <div className="sc-badge small">Financial Model</div>
+                <h3 className="sc-card-title">{model.name}</h3>
+                <p className="sc-card-summary">{model.summary}</p>
+                <div className="sc-card-metrics">
                   {model.outputs.slice(0, 2).map((o, i) => (
-                    <span key={i} className="mini-metric">
+                    <span key={i} className="sc-card-metric">
                       <strong>{o.label}:</strong> {o.value}
                     </span>
                   ))}
                 </div>
-                <div className="model-card-footer">
-                  <span className="creator-pill small">
-                    <span className="creator-avatar small">{model.creator[0]}</span>
+                <div className="sc-card-footer">
+                  <span className="sc-creator small">
+                    <span className="sc-creator-avatar small">{model.creator[0]}</span>
                     {model.creator}
                   </span>
                 </div>
@@ -66,8 +48,15 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <footer className="landing-footer">
-        Built with <strong>Shortcut AI</strong>
+      <footer className="sc-footer">
+        <div className="sc-footer-inner">
+          <span>© 2025 Shortcut AI. All rights reserved.</span>
+          <span className="sc-footer-links">
+            <span>Privacy</span>
+            <span>Terms</span>
+            <span>Changelog</span>
+          </span>
+        </div>
       </footer>
     </div>
   );
