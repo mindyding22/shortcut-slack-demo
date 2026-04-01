@@ -125,7 +125,7 @@ function SlackUnfurlCard({ card }) {
   );
 }
 
-/* ─── Channel content panels ─── */
+/* ─── Panels ─── */
 
 function NotifyPanel() {
   const [modelName, setModelName] = useState("");
@@ -166,64 +166,80 @@ function NotifyPanel() {
   const showPreview = modelName && validOutputs.length > 0;
 
   return (
-    <div className="slack-layout">
-      {/* Left: compose form */}
-      <div className="slack-compose-panel">
-        <div className="slack-compose-header">
-          <h2>Compose Notification</h2>
-          <p className="slack-compose-desc">Fill in the model details, then send to Slack.</p>
+    <div className="demo-split">
+      {/* Left: Shortcut AI side */}
+      <div className="demo-shortcut-side">
+        <div className="demo-side-label">
+          <svg width="18" height="18" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="4" fill="#16A34A"/><path d="M8 12L16 8L24 12L16 16L8 12Z" fill="white" opacity="0.9"/><path d="M8 16L16 20L24 16" stroke="white" strokeWidth="2" fill="none" opacity="0.7"/></svg>
+          <span>Shortcut AI</span>
         </div>
-        <div className="slack-compose-samples">
-          <span className="slack-compose-samples-label">Quick fill:</span>
+        <h2 className="demo-shortcut-title">Model Complete</h2>
+        <p className="demo-shortcut-desc">When an analyst finishes a model, Shortcut AI automatically sends a notification to Slack.</p>
+
+        <div className="demo-shortcut-samples">
+          <span className="demo-samples-label">Try a sample model:</span>
           {SAMPLE_MODELS.map(s => (
-            <button key={s.name} type="button" className="slack-sample-chip" onClick={() => loadSample(s)}>{s.name}</button>
+            <button key={s.name} type="button" className="demo-sample-chip" onClick={() => loadSample(s)}>{s.name}</button>
           ))}
         </div>
-        <form onSubmit={handleSubmit} className="slack-compose-form">
+
+        <form onSubmit={handleSubmit} className="demo-shortcut-form">
           <label>Model Name</label>
           <input type="text" required placeholder='e.g. "Tesla DCF Analysis"' value={modelName} onChange={e => setModelName(e.target.value)} />
-          <div className="slack-outputs-header"><label>Key Outputs</label><button type="button" className="slack-add-btn" onClick={addOutput}>+ Add</button></div>
+          <div className="demo-outputs-header"><label>Key Outputs</label><button type="button" className="demo-add-btn" onClick={addOutput}>+ Add</button></div>
           {outputs.map((output, i) => (
-            <div key={i} className="slack-output-row">
+            <div key={i} className="demo-output-row">
               <input type="text" placeholder="Label" value={output.label} onChange={e => updateOutput(i, "label", e.target.value)} />
               <input type="text" placeholder="Value" value={output.value} onChange={e => updateOutput(i, "value", e.target.value)} />
-              {outputs.length > 1 && <button type="button" className="slack-remove-btn" onClick={() => removeOutput(i)}>×</button>}
+              {outputs.length > 1 && <button type="button" className="demo-remove-btn" onClick={() => removeOutput(i)}>×</button>}
             </div>
           ))}
-          <button type="submit" className="slack-send-btn" disabled={loading}>
-            {loading ? "Sending..." : "Send to Slack"}
+          <button type="submit" className="demo-send-btn" disabled={loading}>
+            {loading ? "Sending..." : "Send to Slack →"}
           </button>
         </form>
-        {status && <p className={`slack-status ${status.type}`}>{status.text}</p>}
+        {status && <p className={`demo-status ${status.type}`}>{status.text}</p>}
       </div>
 
-      {/* Right: Slack preview */}
-      <div className="slack-preview-pane">
-        <div className="slack-channel-header">
-          <span className="slack-channel-hash">#</span> model-updates
+      {/* Right: Slack side */}
+      <div className="demo-slack-side">
+        <div className="demo-side-label slack">
+          <span className="demo-slack-icon">💬</span>
+          <span>Slack Preview</span>
         </div>
-        <div className="slack-messages-area">
-          {!showPreview && sentMessages.length === 0 && (
-            <div className="slack-empty-state">
-              <div className="slack-empty-icon">💬</div>
-              <p>Fill in the form to preview how your notification will look in Slack</p>
+        <div className="demo-slack-window">
+          <div className="slack-sidebar-mini">
+            <div className="slack-mini-workspace">Acme Corp</div>
+            <div className="slack-mini-channel active"># model-updates</div>
+            <div className="slack-mini-channel"># general</div>
+            <div className="slack-mini-channel"># random</div>
+          </div>
+          <div className="slack-preview-main">
+            <div className="slack-channel-header">
+              <span className="slack-channel-hash">#</span> model-updates
             </div>
-          )}
-          {sentMessages.map((msg, i) => (
-            <SlackBotMessage key={`sent-${i}`}>
-              <SlackNotificationCard modelName={msg.modelName} outputs={msg.outputs} />
-            </SlackBotMessage>
-          ))}
-          {showPreview && (
-            <>
-              <div className="slack-date-divider">
-                <span>Today</span>
-              </div>
-              <SlackBotMessage>
-                <SlackNotificationCard modelName={modelName} outputs={validOutputs} />
-              </SlackBotMessage>
-            </>
-          )}
+            <div className="slack-messages-area">
+              {!showPreview && sentMessages.length === 0 && (
+                <div className="slack-empty-state">
+                  <div className="slack-empty-icon">💬</div>
+                  <p>Fill in the form to preview how the notification appears in Slack</p>
+                </div>
+              )}
+              {sentMessages.map((msg, i) => (
+                <SlackBotMessage key={`sent-${i}`}>
+                  <SlackNotificationCard modelName={msg.modelName} outputs={msg.outputs} />
+                </SlackBotMessage>
+              ))}
+              {showPreview && (
+                <>
+                  <div className="slack-date-divider"><span>Today</span></div>
+                  <SlackBotMessage>
+                    <SlackNotificationCard modelName={modelName} outputs={validOutputs} />
+                  </SlackBotMessage>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -252,126 +268,113 @@ function UnfurlPanel() {
   }
 
   return (
-    <div className="slack-layout">
-      {/* Left: compose */}
-      <div className="slack-compose-panel">
-        <div className="slack-compose-header">
-          <h2>Simulate Link Unfurl</h2>
-          <p className="slack-compose-desc">Paste a Shortcut AI link to see how it auto-expands in Slack.</p>
+    <div className="demo-split">
+      {/* Left: Shortcut AI side */}
+      <div className="demo-shortcut-side">
+        <div className="demo-side-label">
+          <svg width="18" height="18" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="4" fill="#16A34A"/><path d="M8 12L16 8L24 12L16 16L8 12Z" fill="white" opacity="0.9"/><path d="M8 16L16 20L24 16" stroke="white" strokeWidth="2" fill="none" opacity="0.7"/></svg>
+          <span>Shortcut AI</span>
         </div>
-        <div className="slack-info-box">
+        <h2 className="demo-shortcut-title">Link Unfurling</h2>
+        <p className="demo-shortcut-desc">When someone pastes a Shortcut AI link in Slack, it auto-expands into a rich preview card.</p>
+
+        <div className="demo-info-box">
           <strong>How it works</strong>
           <ol>
             <li>Someone pastes a <code>shortcut.ai/share/...</code> link in Slack</li>
-            <li>Slack sends a <code>link_shared</code> event to your server</li>
+            <li>Slack sends a <code>link_shared</code> event to the server</li>
             <li>The server responds with a rich preview card</li>
           </ol>
         </div>
-        <div className="slack-compose-samples">
-          <span className="slack-compose-samples-label">Try a link:</span>
+
+        <div className="demo-shortcut-samples">
+          <span className="demo-samples-label">Try a link:</span>
           {SAMPLE_LINKS.map(l => (
-            <button key={l} type="button" className="slack-sample-chip" onClick={() => { setLink(l); setCard(null); setStatus(null); }}>...{l.slice(-12)}</button>
+            <button key={l} type="button" className="demo-sample-chip" onClick={() => { setLink(l); setCard(null); setStatus(null); }}>...{l.slice(-12)}</button>
           ))}
         </div>
-        <form onSubmit={handleSimulate} className="slack-compose-form">
+
+        <form onSubmit={handleSimulate} className="demo-shortcut-form">
           <label>Shortcut AI Link</label>
           <input type="url" required placeholder="https://shortcut.ai/share/..." value={link} onChange={e => setLink(e.target.value)} />
-          <button type="submit" className="slack-send-btn" disabled={loading}>{loading ? "Loading..." : "Simulate Unfurl"}</button>
+          <button type="submit" className="demo-send-btn" disabled={loading}>{loading ? "Loading..." : "Simulate Unfurl →"}</button>
         </form>
-        {status && <p className={`slack-status ${status.type}`}>{status.text}</p>}
+        {status && <p className={`demo-status ${status.type}`}>{status.text}</p>}
       </div>
 
-      {/* Right: Slack preview */}
-      <div className="slack-preview-pane">
-        <div className="slack-channel-header">
-          <span className="slack-channel-hash">#</span> general
+      {/* Right: Slack side */}
+      <div className="demo-slack-side">
+        <div className="demo-side-label slack">
+          <span className="demo-slack-icon">💬</span>
+          <span>Slack Preview</span>
         </div>
-        <div className="slack-messages-area">
-          {!card && (
-            <div className="slack-empty-state">
-              <div className="slack-empty-icon">🔗</div>
-              <p>Paste a link and click "Simulate Unfurl" to see the preview</p>
+        <div className="demo-slack-window">
+          <div className="slack-sidebar-mini">
+            <div className="slack-mini-workspace">Acme Corp</div>
+            <div className="slack-mini-channel"># model-updates</div>
+            <div className="slack-mini-channel active"># general</div>
+            <div className="slack-mini-channel"># random</div>
+          </div>
+          <div className="slack-preview-main">
+            <div className="slack-channel-header">
+              <span className="slack-channel-hash">#</span> general
             </div>
-          )}
-          {card && (
-            <>
-              <div className="slack-date-divider">
-                <span>Today</span>
-              </div>
-              <SlackUserMessage
-                user="Sarah Chen"
-                text={<>Hey team, check out this model I just finished: <a className="slack-inline-link" href="#" onClick={e => e.preventDefault()}>{link}</a></>}
-              />
-              <div className="slack-unfurl-thread">
-                <SlackUnfurlCard card={card} />
-              </div>
-            </>
-          )}
+            <div className="slack-messages-area">
+              {!card && (
+                <div className="slack-empty-state">
+                  <div className="slack-empty-icon">🔗</div>
+                  <p>Paste a link and click "Simulate Unfurl" to see the preview</p>
+                </div>
+              )}
+              {card && (
+                <>
+                  <div className="slack-date-divider"><span>Today</span></div>
+                  <SlackUserMessage
+                    user="Sarah Chen"
+                    text={<>Hey team, check out this model I just finished: <a className="slack-inline-link" href="#" onClick={e => e.preventDefault()}>{link}</a></>}
+                  />
+                  <div className="slack-unfurl-thread">
+                    <SlackUnfurlCard card={card} />
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-/* ─── Main Admin shell (Slack-like) ─── */
+/* ─── Main Admin page ─── */
 
 export default function Admin() {
   const [tab, setTab] = useState("notify");
 
   return (
-    <div className="slack-app">
-      {/* Slack sidebar */}
-      <aside className="slack-sidebar">
-        <div className="slack-workspace-header">
-          <div className="slack-workspace-name">Shortcut AI</div>
-          <div className="slack-workspace-edit">▾</div>
+    <div className="demo-page">
+      {/* Top nav */}
+      <nav className="demo-topnav">
+        <div className="demo-topnav-left">
+          <span className="demo-topnav-title">Shortcut AI — Slack Integration Demo</span>
         </div>
-
-        <div className="slack-sidebar-section">
-          <div className="slack-sidebar-label">Channels</div>
-          <button
-            className={`slack-channel-btn ${tab === "notify" ? "active" : ""}`}
-            onClick={() => setTab("notify")}
-          >
-            <span className="slack-channel-prefix">#</span> model-updates
+        <div className="demo-topnav-tabs">
+          <button className={`demo-tab ${tab === "notify" ? "active" : ""}`} onClick={() => setTab("notify")}>
+            Feature 1: Notifications
           </button>
-          <button
-            className={`slack-channel-btn ${tab === "unfurl" ? "active" : ""}`}
-            onClick={() => setTab("unfurl")}
-          >
-            <span className="slack-channel-prefix">#</span> general
+          <button className={`demo-tab ${tab === "unfurl" ? "active" : ""}`} onClick={() => setTab("unfurl")}>
+            Feature 2: Link Unfurling
           </button>
+          <Link to="/model/a2a7d1d5-b23b-40a8-afd3-ce0c19a78322" className="demo-tab">
+            Feature 3: Landing Page →
+          </Link>
         </div>
+      </nav>
 
-        <div className="slack-sidebar-section">
-          <div className="slack-sidebar-label">Direct Messages</div>
-          <button className="slack-channel-btn" disabled>
-            <span className="slack-dm-status online"></span> Sarah Chen
-          </button>
-          <button className="slack-channel-btn" disabled>
-            <span className="slack-dm-status online"></span> James Park
-          </button>
-          <button className="slack-channel-btn" disabled>
-            <span className="slack-dm-status"></span> Emily Rivera
-          </button>
-        </div>
-
-        <div className="slack-sidebar-section" style={{ marginTop: 'auto' }}>
-          <div className="slack-sidebar-label">Apps</div>
-          <button className="slack-channel-btn" disabled>
-            <span className="slack-app-icon">⚡</span> Shortcut AI
-          </button>
-        </div>
-
-        <div className="slack-sidebar-footer">
-          <Link to="/dashboard" className="slack-sidebar-link">Open Dashboard →</Link>
-        </div>
-      </aside>
-
-      {/* Main content */}
-      <main className="slack-main">
+      {/* Content */}
+      <div className="demo-content">
         {tab === "notify" ? <NotifyPanel /> : <UnfurlPanel />}
-      </main>
+      </div>
     </div>
   );
 }

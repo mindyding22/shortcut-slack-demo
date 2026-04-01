@@ -1471,6 +1471,319 @@ code { background: #f0f0f5; padding: 2px 6px; border-radius: 4px; font-size: 0.8
   .sc-footer-inner { flex-direction: column; gap: 8px; }
 }
 
+/* ══════════════════════════════════════════════════════════
+   DEMO PAGE (split view: Shortcut AI + Slack)
+   ══════════════════════════════════════════════════════════ */
+
+.demo-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+}
+
+/* Demo top nav */
+.demo-topnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.demo-topnav-left { display: flex; align-items: center; }
+
+.demo-topnav-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.demo-topnav-tabs {
+  display: flex;
+  gap: 4px;
+  height: 100%;
+  align-items: center;
+}
+
+.demo-tab {
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 6px;
+  text-decoration: none;
+  width: auto;
+}
+
+.demo-tab:hover { background: #f3f4f6; color: #111; }
+.demo-tab.active { background: #111; color: #fff; }
+
+/* Demo content */
+.demo-content {
+  flex: 1;
+  padding: 24px;
+  overflow: auto;
+}
+
+/* Split layout */
+.demo-split {
+  display: flex;
+  gap: 24px;
+  max-width: 1300px;
+  margin: 0 auto;
+  min-height: 600px;
+}
+
+/* Side labels */
+.demo-side-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #16a34a;
+  margin-bottom: 16px;
+}
+
+.demo-side-label.slack {
+  color: #3F0E40;
+}
+
+.demo-slack-icon { font-size: 0.9rem; }
+
+/* Left: Shortcut AI side */
+.demo-shortcut-side {
+  width: 400px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 28px;
+}
+
+.demo-shortcut-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.4rem;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.demo-shortcut-desc {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.demo-shortcut-samples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.demo-samples-label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.demo-sample-chip {
+  font-size: 0.72rem;
+  padding: 4px 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #374151;
+  font-weight: 500;
+  width: auto;
+}
+
+.demo-sample-chip:hover { background: #111; color: #fff; border-color: #111; }
+
+.demo-shortcut-form label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.demo-shortcut-form input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  background: #fff;
+}
+
+.demo-shortcut-form input:focus {
+  outline: none;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.15);
+}
+
+.demo-outputs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.demo-outputs-header label { margin-bottom: 0; }
+
+.demo-add-btn {
+  font-size: 0.75rem;
+  padding: 2px 10px;
+  background: none;
+  border: 1px solid #16a34a;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #16a34a;
+  font-weight: 600;
+  width: auto;
+}
+
+.demo-add-btn:hover { background: #16a34a; color: #fff; }
+
+.demo-output-row {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.demo-output-row input { flex: 1; }
+
+.demo-remove-btn {
+  width: 32px;
+  height: 34px;
+  padding: 0;
+  background: none;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #d1d5db;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.demo-remove-btn:hover { color: #dc2626; border-color: #dc2626; }
+
+.demo-send-btn {
+  width: 100%;
+  padding: 10px;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.demo-send-btn:hover:not(:disabled) { background: #333; }
+.demo-send-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.demo-status {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.demo-status.success { background: #f0fdf4; color: #16a34a; }
+.demo-status.error { background: #fef2f2; color: #dc2626; }
+
+.demo-info-box {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 16px;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.demo-info-box strong { display: block; margin-bottom: 6px; color: #111; }
+.demo-info-box ol { padding-left: 18px; color: #6b7280; }
+.demo-info-box li { margin-bottom: 3px; }
+.demo-info-box code { background: #f3f4f6; padding: 1px 5px; border-radius: 3px; font-size: 0.75rem; }
+
+/* Right: Slack preview side */
+.demo-slack-side {
+  flex: 1;
+  min-width: 0;
+}
+
+.demo-slack-window {
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  height: calc(100% - 40px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+/* Mini Slack sidebar inside preview */
+.slack-sidebar-mini {
+  width: 180px;
+  background: #3F0E40;
+  padding: 12px 0;
+  flex-shrink: 0;
+}
+
+.slack-mini-workspace {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #fff;
+  padding: 4px 14px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 8px;
+}
+
+.slack-mini-channel {
+  font-size: 0.8rem;
+  color: #cba6cc;
+  padding: 3px 14px;
+}
+
+.slack-mini-channel.active {
+  background: #1164A3;
+  color: #fff;
+  border-radius: 4px;
+  margin: 0 6px;
+  padding: 3px 8px;
+}
+
+.slack-preview-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ═══ Responsive (Demo page) ═══ */
+@media (max-width: 1000px) {
+  .demo-split { flex-direction: column; }
+  .demo-shortcut-side { width: 100%; }
+  .demo-slack-window { min-height: 400px; }
+}
+
 /* ═══ Responsive (Slack UI) ═══ */
 @media (max-width: 900px) {
   .slack-sidebar { width: 200px; }
